@@ -3,7 +3,7 @@
 
 # Task 1
 
-Мы создаем для , и соответственноCMakeLists.txtformatter_ex_libformatter_libsolver_application
+Мы создаем  CMakeLists.txt formatter_ex_libformatter_libsolver_application
 
 CMakeLists.txt Содержание для:formatter_ex_lib
 ```
