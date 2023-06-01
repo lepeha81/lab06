@@ -113,6 +113,41 @@ set(CPACK_GENERATOR "DEB")
 
 include(CPack)
 ```
+1. `include(InstallRequiredSystemLibraries)`: позволяет установить необходимые библиотеки системы.
+
+2. `set(CPACK_PACKAGE_CONTACT inkey.cherry@gmail.com)`: устанавливает контакт для связи по поводу пакета.
+
+3. `set(CPACK_PACKAGE_VERSION ${PRINT_VERSION})`: устанавливает версию пакета.
+
+4. `set(CPACK_PACKAGE_DESCRIPTION_FILE ${CMAKE_CURRENT_SOURCE_DIR}/DESCRIPTION)`: устанавливает файл с описанием пакета.
+
+5. `set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "C++ app for solving quadratic equations")`: устанавливает краткое описание пакета.
+
+6. `set(CPACK_RESOURCE_FILE_LICENSE ${CMAKE_CURRENT_SOURCE_DIR}/LICENSE)`: устанавливает лицензионный файл пакета.
+
+7. `set(CPACK_RESOURCE_FILE_README ${CMAKE_CURRENT_SOURCE_DIR}/README.md)`: устанавливает файл README пакета.
+
+8. `set(CPACK_SOURCE_IGNORE_FILES "\\\\.cmake;/build/;/.git/;/.github/")`: задает файлы, которые должны быть проигнорированы при создании исходного пакета.
+
+9. `set(CPACK_SOURCE_INSTALLED_DIRECTORIES "${CMAKE_SOURCE_DIR}; /")`: устанавливает директории, которые должны быть включены в исходный пакет.
+
+10. `set(CPACK_SOURCE_GENERATOR "TGZ;ZIP")`: задает форматы пакетов, которые будут сгенерированы при создании исходного пакета.
+
+11. `set(CPACK_DEBIAN_PACKAGE_NAME "solverapp-dev")`: устанавливает имя пакета в Debian.
+
+12. `set(CPACK_DEBIAN_FILE_NAME "solver-${PRINT_VERSION}.deb")`: задает название файла пакета Debian.
+
+13. `set(CPACK_DEBIAN_PACKAGE_VERSION ${PRINT_VERSION})`: устанавливает версию пакета в Debian.
+
+14. `set(CPACK_DEBIAN_PACKAGE_ARCHITECTURE "all")`: устанавливает архитектуру пакета в Debian.
+
+15. `set(CPACK_DEBIAN_PACKAGE_MAINTAINER "ledibonibell")`: устанавливает автора пакета в Debian.
+
+16. `set(CPACK_DEBIAN_PACKAGE_RELEASE 1)`: устанавливает выпуск пакета в Debian.
+
+17. `set(CPACK_GENERATOR "DEB")`: задает формат пакета, который будет сгенерирован.
+
+18. `include(CPack)`: включает инструменты CPack для упаковки приложения в пакеты.
 Коммитим и пушим на гит.
 
 Создайте ЛИЦЕНЗИЮ и ОПИСАНИЕ для работы с нашей программой
