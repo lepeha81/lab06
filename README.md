@@ -275,3 +275,110 @@ jobs:
         allowUpdates: true
 ```
 коммитим и пушим на гит
+
+```
+name: CMake
+```
+Это название проекта, указываемое в файле конфигурации.
+
+```
+on:
+ push:
+  branches: [master]
+ pull_request:
+  branches: [master]
+```
+Это описание событий, на которые должен реагировать GitHub Actions. Здесь указываются события для ветки `master`, если на нее выполняются операции `push` или `pull_request`.
+
+```
+jobs: 
+ build_Linux:
+```
+Описание запланированных задач (jobs) - процессов, которые GitHub Actions должен выполнить. Запуск задачи назначается названию задачи - build_Linux. 
+
+```
+runs-on: ubuntu-latest
+```
+Определяет операционную систему, на которой выполняется задача. В данном случае - latest-версия Ubuntu.
+
+```
+steps:
+ - uses: actions/checkout@v3
+```
+Использует действие, которое создает локальную копию репозитория, чтобы иметь доступ к его файлам и выполнять на них операции. В данном конкретном случае используется `actions/checkout` с тегом `v3`.
+
+```
+- name: Configure Solver
+  run: cmake ${{github.workspace}} -B ${{github.workspace}}/build
+```
+Запускает конфигурацию проекта CMake с параметрами `${{github.workspace}}` (указывает на рабочую директорию) и `-B ${{github.workspace}}/build` (выполнение конфигурации проекта из директории `build`, которая создается, если её нет).
+
+```
+- name: Build Solver
+  run: cmake --build ${{github.workspace}}/build
+```
+Создаёт объекты из исходных файлов, используя инструкции `Makefile`, которые сгенерированы из сценария CMake, которые определяют, как исходные файлы должны быть скомпилированы.
+
+```
+on:
+ push:
+   tags:
+     - v**
+```
+Здесь указываются события, на которые реагирует GitHub Actions. События ориентированы на пометки, отвечающие шаблону `v**`.
+
+```
+permissions:
+  contents: write
+```
+Предоставляет права на запись в файлы, находящиеся в репозитории.
+
+```
+jobs: 
+
+  build_packages_Linux:
+
+    runs-on: ubuntu-latest
+```
+Описывается создание пакетов (build packages) с помощью CMake на ОС Ubuntu.
+
+```
+steps:
+    - uses: actions/checkout@v3
+```
+Используется аналогичное действие, которое создает локальную копию репозитория.
+
+```
+- name: Configure Solver
+  run: cmake ${{github.workspace}} -B ${{github.workspace}}/build -D PRINT_VERSION=${GITHUB_REF_NAME#v}
+```
+Запускает конфигурацию проекта CMake с параметрами `${{github.workspace}}` (указывает на рабочую директорию), `-B ${{github.workspace}}/build` (выполнение конфигурации проекта из директории `build`, которая создается, если её нет) и `-D PRINT_VERSION=${GITHUB_REF_NAME#v}` (определяет устанавливаемую переменную PRINT_VERSION для передачи версии проекта в момент его сборки; `${GITHUB_REF_NAME}` содержит ссылку на тег, который сокращается до «v»).
+
+```
+- name: Build Solver
+  run: cmake --build ${{github.workspace}}/build
+```
+Создаёт объекты из исходных файлов, используя инструкции `Makefile`, которые сгенерированы из сценария CMake, который определяет, как исходные файлы должны быть скомпилированы.
+
+```
+- name: Build package
+  run: cmake --build ${{github.workspace}}/build --target package
+```
+Создаёт пакеты, используя инструкции `CPack`, которые были сгенерированы из сценария CMake, который определяет компоненты, необходимые для создания пакета.
+
+```
+- name: Build source package
+  run: cmake --build ${{github.workspace}}/build --target package_source
+```
+Создаёт пакеты с исходным кодом, используя инструкции `CPack`, которые были сгенерированы из сценария CMake.
+
+```
+- name: Make a release
+  uses: ncipollo/release-action@v1.10.0
+  with:
+    artifacts: "build/*.deb,build/*.tar.gz,build/*.zip"
+    replacesArtifacts: false
+    GITHUB_TOKEN: ${{ secrets.GH_PAT }}
+    allowUpdates: true
+```
+Последний шаг загружает созданные в предыдущих шагах пакеты в активы релиза. В этом примере используется действие `ncipollo/release-action`, которое создает релиз в репозитории и загружает пакеты таким образом, чтобы эти файлы были доступны для загрузки в качестве компонентов релиза.
