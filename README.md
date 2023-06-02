@@ -22,6 +22,18 @@ target_include_directories(formatter_ex_lib PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/.
 
 target_link_libraries(formatter_ex_lib formatter_lib)
 ```
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../formatter_lib formatter_lib_dir)
+Эта строка добавляет подкаталог, содержащий formatter_lib, в проект. Второй аргумент formatter_lib_dir задает имя переменной, которая будет содержать путь к этому каталогу.
+
+add_library(formatter_ex_lib STATIC ${CMAKE_CURRENT_SOURCE_DIR}/formatter_ex.cpp)
+Это определение библиотеки formatter_ex_lib, которая создается из исходного файла formatter_ex.cpp.
+
+target_include_directories(formatter_ex_lib PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/../formatter_lib )
+Эта строка включает каталог, содержащий formatter_lib, в список каталогов, где нужно искать заголовочные файлы для formatter_ex_lib.
+
+target_link_libraries(formatter_ex_lib formatter_lib)
+Эта строка задает список библиотек, с которыми должна быть связана библиотека formatter_ex_lib.
+
 
 CMakeLists.txt Содержание для:formatter_lib
 ```
@@ -34,6 +46,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 add_library(formatter_lib STATIC ${CMAKE_CURRENT_SOURCE_DIR}/formatter.cpp ${CMAKE_CURRENT_SOURCE_DIR}/formatter.h)
 ```
+
 
 CMakeLists.txt Содержание для:solver_application
 ```
@@ -53,7 +66,23 @@ target_include_directories(formatter_ex_lib PUBLIC /../formatter_lib /../formatt
 
 target_link_libraries(solver formatter_ex_lib formatter_lib solver_lib)
 ```
+add_subdirectory(/../formatter_ex_lib formatter_ex_lib_dir)
+Эта строка добавляет подкаталог formatter_ex_lib в проект. Второй аргумент formatter_ex_lib_dir задает имя переменной, которая будет содержать путь к этому каталогу.
 
+
+add_library(solver_lib /../solver_lib/solver.cpp /../solver_lib/solver.h)
+Эта строка определяет библиотеку solver_lib из исходных файлов solver.cpp и solver.h.
+
+
+add_executable(solver /equation.cpp)
+Эта строка определяет, что исполняемый файл solver будет создан из исходного файла /equation.cpp.
+
+
+target_include_directories(formatter_ex_lib PUBLIC /../formatter_lib /../formatter_ex_lib /../solver_lib)
+Эта строка добавляет каталоги /../formatter_lib, /../formatter_ex_lib и /../solver_lib в список каталогов, где будут искаться заголовочные файлы для библиотеки formatter_ex_lib.
+
+target_link_libraries(solver formatter_ex_lib formatter_lib solver_lib)
+Эта строка задает список библиотек, с которыми должен быть связан исполняемый файл solver.
 Теперь давайте создадим для связывания все каталогиCMakeLists.txt
 
 CMakeLists.txt содержание:
@@ -80,6 +109,30 @@ install(TARGETS solver
 
 include(CPackConfig.cmake)
 ```
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/formatter_ex_lib formatter_ex_lib_dir)
+Эта строка добавляет подкаталог formatter_ex_lib в проект. Второй аргумент formatter_ex_lib_dir задает имя переменной, которая будет содержать путь к этому каталогу.
+
+add_library(solver_lib ${CMAKE_CURRENT_SOURCE_DIR}/solver_lib/solver.cpp)
+Эта строка определяет библиотеку solver_lib из исходного файла solver.cpp.
+
+add_executable(solver ${CMAKE_CURRENT_SOURCE_DIR}/solver_application/equation.cpp)
+Эта строка определяет, что исполняемый файл solver будет создан из исходного файла /solver_application/equation.cpp.
+
+target_include_directories(formatter_ex_lib PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/formatter_lib ${CMAKE_CURRENT_SOURCE_DIR}/formatter_ex_lib ${CMAKE_CURRENT_SOURCE_DIR}/solver_lib)
+Эта строка добавляет каталоги ${CMAKE_CURRENT_SOURCE_DIR}/formatter_lib, ${CMAKE_CURRENT_SOURCE_DIR}/formatter_ex_lib и ${CMAKE_CURRENT_SOURCE_DIR}/solver_lib в список каталогов, где будут искаться заголовочные файлы для библиотеки formatter_ex_lib.
+
+target_link_libraries(solver formatter_ex_lib formatter_lib solver_lib)
+Эта строка задает список библиотек, с которыми должен быть связан исполняемый файл solver.
+
+install(TARGETS solver
+    RUNTIME DESTINATION bin
+)
+Эта строка добавляет инструкцию установки для исполняемого файла solver. Она сообщает CMake, что этот файл должен быть установлен в каталоге bin.
+
+include(CPackConfig.cmake)
+Эта строка подключает файл CPackConfig.cmake, который используется для настройки установки проекта через CPack.
+
+
 Коммитим и пушим на гит
 
 
