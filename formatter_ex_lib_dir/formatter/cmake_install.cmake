@@ -1,4 +1,4 @@
-# Install script for directory: /home/ledibonibell/lab-06/formatter_lib
+# Install script for directory: /home/lab06/formatter_lib
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

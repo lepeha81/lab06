@@ -1,4 +1,4 @@
-# Install script for directory: /home/ledibonibell/lab-06/formatter_ex_lib
+# Install script for directory: /home/lab06/formatter_ex_lib
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -44,7 +44,7 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("/home/ledibonibell/lab-06/formatter_ex_lib_dir/formatter/cmake_install.cmake")
+  include("/home/lab06/formatter_ex_lib_dir/formatter/cmake_install.cmake")
 
 endif()
 

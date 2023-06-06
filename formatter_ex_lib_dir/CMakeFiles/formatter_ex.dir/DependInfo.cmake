@@ -8,7 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/ledibonibell/lab-06/formatter_ex_lib/formatter_ex.cpp" "formatter_ex_lib_dir/CMakeFiles/formatter_ex.dir/formatter_ex.cpp.o" "gcc" "formatter_ex_lib_dir/CMakeFiles/formatter_ex.dir/formatter_ex.cpp.o.d"
+  "/home/lab06/formatter_ex_lib/formatter_ex.cpp" "formatter_ex_lib_dir/CMakeFiles/formatter_ex.dir/formatter_ex.cpp.o" "gcc" "formatter_ex_lib_dir/CMakeFiles/formatter_ex.dir/formatter_ex.cpp.o.d"
   )
 
 # Targets to which this target links.
