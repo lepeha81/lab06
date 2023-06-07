@@ -142,7 +142,7 @@ CPackConfig.cmake содержание:
 ```
 include(InstallRequiredSystemLibraries)
 
-set(CPACK_PACKAGE_CONTACT inkey.cherry@gmail.com)
+set(CPACK_PACKAGE_CONTACT alex-lobnya-2005@mail.ru)
 set(CPACK_PACKAGE_VERSION ${PRINT_VERSION})
 set(CPACK_PACKAGE_DESCRIPTION_FILE ${CMAKE_CURRENT_SOURCE_DIR}/DESCRIPTION)
 set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "C++ app for solving quadratic equations")
@@ -159,7 +159,7 @@ set(CPACK_DEBIAN_PACKAGE_NAME "solverapp-dev")
 set(CPACK_DEBIAN_FILE_NAME "solver-${PRINT_VERSION}.deb")
 set(CPACK_DEBIAN_PACKAGE_VERSION ${PRINT_VERSION})
 set(CPACK_DEBIAN_PACKAGE_ARCHITECTURE "all")
-set(CPACK_DEBIAN_PACKAGE_MAINTAINER "ledibonibell")
+set(CPACK_DEBIAN_PACKAGE_MAINTAINER "lepeha81")
 set(CPACK_DEBIAN_PACKAGE_RELEASE 1)
 
 set(CPACK_GENERATOR "DEB")
@@ -168,7 +168,7 @@ include(CPack)
 ```
 1. `include(InstallRequiredSystemLibraries)`: позволяет установить необходимые библиотеки системы.
 
-2. `set(CPACK_PACKAGE_CONTACT inkey.cherry@gmail.com)`: устанавливает контакт для связи по поводу пакета.
+2. `set(CPACK_PACKAGE_CONTACT )`: устанавливает контакт для связи по поводу пакета.
 
 3. `set(CPACK_PACKAGE_VERSION ${PRINT_VERSION})`: устанавливает версию пакета.
 
@@ -194,7 +194,7 @@ include(CPack)
 
 14. `set(CPACK_DEBIAN_PACKAGE_ARCHITECTURE "all")`: устанавливает архитектуру пакета в Debian.
 
-15. `set(CPACK_DEBIAN_PACKAGE_MAINTAINER "ledibonibell")`: устанавливает автора пакета в Debian.
+15. `set(CPACK_DEBIAN_PACKAGE_MAINTAINER "")`: устанавливает автора пакета в Debian.
 
 16. `set(CPACK_DEBIAN_PACKAGE_RELEASE 1)`: устанавливает выпуск пакета в Debian.
 
